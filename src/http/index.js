@@ -37,6 +37,7 @@ class ServerHttp {
         const body = req.body;
         const attachments = body?.attachments
         const bot = req.bot;
+        console.log('body', body)
         try {
 
             const mapperAttributes = body?.changed_attributes?.map((a) => Object.keys(a)).flat(2)
@@ -108,25 +109,25 @@ class ServerHttp {
      */
     initialization = (bot = undefined) => {
         if(!bot){
-            throw new Error('DEBES_DE_PASAR_BOT')
+            throw new Error('DEBES_DE_PASAR_BOT');
         }
-        this.app = express()
-        this.app.use(cors())
-        this.app.use(express.json())
-        this.app.use(express.static('public'))
+        this.app = express();
+        this.app.use(cors());
+        this.app.use(express.json());
+        this.app.use(express.static('public'));
 
         this.app.use((req, _, next) => {
             req.bot = bot;
-            next()
-        })
+            next();
+        });
 
         this.app.post(`/chatwoot`, this.chatwootCtrl)
         this.app.get('/scan-qr',this.qrCtrl)
 
         this.app.listen(this.port, () => {
-            console.log(``)
-            console.log(`🦮 http://localhost:${this.port}/scan-qr`)
-            console.log(``)
+            console.log(` *`);
+            console.log(`🦮 http://localhost:${this.port}/scan-qr`);
+            console.log(` *`);
         })
     }
 

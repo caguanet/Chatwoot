@@ -30,15 +30,15 @@ const queue = new Queue({
 })
 
 const main = async () => {
-    const adapterDB = new MockAdapter()
-    const adapterFlow = createFlow([flowPrincipal])
-    const adapterProvider = createProvider(BaileysProvider)
+    const adapterDB = new MockAdapter();
+    const adapterFlow = createFlow([flowPrincipal]);
+    const adapterProvider = createProvider(BaileysProvider);
 
     const bot = await createBot({
         flow: adapterFlow,
         provider: adapterProvider,
         database: adapterDB,
-    })
+    });
 
     serverHttp.initialization(bot)
 
